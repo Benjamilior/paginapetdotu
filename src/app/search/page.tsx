@@ -1,23 +1,22 @@
-// src/app/page.tsx
-
-"use client";
-
+"use client"
+// src/app/search/page.tsx
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import ProductList from '../components/primer';
 
-const App: React.FC = () => {
-  const router = useRouter();
-
-  const handleGoHome = () => {
-    router.push('/');
-  };
+const SearchPage: React.FC = () => {
+  const searchParams = useSearchParams();
+  const sku = searchParams.get('sku') || ''; // Obtener el SKU de los parámetros de búsqueda
 
   return (
     <div>
-      <ProductList sku="petdotu5" />
+      {sku ? (
+        <ProductList sku={sku} /> // Pasar el SKU al componente ProductList
+      ) : (
+        <p>No se ha proporcionado un SKU.</p>
+      )}
       <button
-        onClick={handleGoHome}
+        onClick={() => window.location.href = '/'}
         className="mt-4 p-2 bg-green-500 text-white"
       >
         Volver al Inicio
@@ -26,4 +25,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default SearchPage;
