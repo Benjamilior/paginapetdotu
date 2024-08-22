@@ -3,6 +3,7 @@ import { Inter, Nabla } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
+import { SearchProvider } from '../../context/SearchContext';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,12 +21,14 @@ export default function RootLayout({
   
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar></Navbar>
-          {children}
-        <Footer></Footer>
-      </body>
-    </html>
+    <SearchProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar></Navbar>
+            {children}
+          <Footer></Footer>
+        </body>
+      </html>
+    </SearchProvider>
   );
 }

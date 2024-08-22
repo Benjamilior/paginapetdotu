@@ -1,10 +1,11 @@
 "use client";
-// components/Navbar.js
-import React, { useState } from 'react';
+// components/Navbar.tsx
+import React from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearch } from '../../../context/SearchContext'; // Importa el hook useSearch
 
 const Navbar = () => {
-  const [sku, setSku] = useState('');
+  const { sku, setSku } = useSearch(); // Obtén el sku y setSku del contexto
   const router = useRouter();
 
   const handleSearch = (event: React.FormEvent) => {
@@ -80,3 +81,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
