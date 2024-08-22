@@ -17,7 +17,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4" id='maincontent'>
       <h1 className="text-2xl font-bold">Buscar Producto</h1>
       <form onSubmit={handleSearch} className="mt-4">
         <input
