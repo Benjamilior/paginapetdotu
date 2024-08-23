@@ -22,7 +22,7 @@ interface Product {
   description: string;
   category: string;
   marca: string;
-  links: string; // Asume que links es una URL de la imagen
+  links: string; 
   prices: Price[];
 }
 
@@ -94,11 +94,11 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   }
 
   return (
-    <div id='maincontentsearch' className="container mx-auto  p-4 max-w-4xl bg-[#1a0140] text-gray-100">
+    <div id='maincontentsearch' className=" w-11/12 container mx-auto  p-4 max-w-4xl bg-[#1a0140] text-gray-100">
       <Button onClick={() => window.location.href = '/'} variant="ghost" className="mb-4 text-gray-300 hover:text-gray-100 hover:bg-[#2f026c]">
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
       </Button>
-      <Card className="bg-[#2f026c] border-[#4a0ca4]">
+      <Card className="bg-[#2f026c] w-11/12 border-[#4a0ca4]">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-100">{product.name}</CardTitle>
           <div className="flex items-center space-x-2 text-sm text-gray-300">
@@ -172,7 +172,12 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
                             <div className="w-4 h-4 rounded-full border-2 border-[#6614df]" />
                           )}
                         </Button>
-                        <span className="font-medium text-gray-100">{price.tienda}</span>
+                        <a
+                        href={price.link}>
+                          <span className="font-medium text-gray-100">{price.tienda}
+
+                          </span>
+                        </a>
                       </div>
                       <div className="flex items-center space-x-2">
                         <span className="font-bold text-gray-100">{formatPrice(price.price)}</span>
