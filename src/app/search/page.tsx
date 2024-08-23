@@ -15,12 +15,7 @@ const SearchPage: React.FC = () => {
       ) : (
         <p>No se ha proporcionado un SKU.</p>
       )}
-      <button
-        onClick={() => window.location.href = '/'}
-        className="mt-4 p-2 bg-green-500 text-white"
-      >
-        Volver al Inicio
-      </button>
+      
     </div>
   );
 };

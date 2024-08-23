@@ -1,4 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
+
+#maincontent,
+#maincontentsearch{
+    
+        height: 90vh;
+        width: 100%;
+      
+}
+
+body{
+        background-color: #1A0140;
+}

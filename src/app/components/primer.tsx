@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { ArrowLeft, Check,ShoppingCart, ChevronDown } from "lucide-react";
 
-// Define the expected structure of the data
 interface Price {
   tienda: string;
   price: number;
@@ -27,6 +34,10 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [sortOption, setSortOption] = useState<string>("price-asc");
+  const [selectedStore, setSelectedStore] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -47,6 +58,29 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
     fetchProduct();
   }, [sku]);
 
+  const filteredAndSortedPrices = useMemo(() => {
+    if (!product?.prices) return []; // Retorna un array vacío si product.prices es undefined
+    return product.prices
+      .filter((price) => price.stock > 0)
+      .filter((price) => price.tienda.toLowerCase().includes(searchTerm.toLowerCase()))
+      .sort((a, b) => {
+        if (sortOption === "price-asc") return a.price - b.price;
+        if (sortOption === "price-desc") return b.price - a.price;
+        if (sortOption === "store-asc") return a.tienda.localeCompare(b.tienda);
+        if (sortOption === "store-desc") return b.tienda.localeCompare(a.tienda);
+        return 0;
+      });
+  }, [product?.prices, searchTerm, sortOption]);
+
+  const bestPrice = filteredAndSortedPrices[0] || {}; // Asegúrate de manejar el caso en que filteredAndSortedPrices sea un array vacío
+
+  const formatPrice = (price: number | null | undefined): string => {
+    if (price === null || price === undefined) {
+      return "$0"; // O cualquier valor predeterminado que prefieras
+    }
+    return `$${price.toLocaleString()}`;
+  };
+
   if (loading) {
     return <div className="text-center mt-5">Loading...</div>;
   }
@@ -60,49 +94,114 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-4 bg-gray-800 rounded-lg shadow-lg">
-      <div className="flex flex-col lg:flex-row">
-      <div className="lg:w-1/3 flex justify-center">
-  {product.links && product.links.startsWith('http') ? (
-    <Image
-      src={product.links || 'https://cdn.shopify.com/s/files/1/0556/8898/6785/files/fit-formula-perro-senior-20-kg-220963.png?v=1714140584'}
-      alt={product.name}
-      width={300}
-      height={300}
-      className="rounded-lg"
-    />
-  ) : (
-    <div className="text-gray-500">No image available</div>
-  )}
-</div>
-
-        <div className="lg:w-2/3 lg:pl-8 mt-6 lg:mt-0">
-          <h1 className="text-2xl font-bold text-white">{product.name}</h1>
-          <p className="text-gray-300">{product.description}</p>
-          <p className="mt-2 text-gray-400">Category: {product.category}</p>
-          <p className="mt-2 text-gray-400">Brand: {product.marca}</p>
-          <h2 className="mt-4 text-xl font-semibold text-white">Prices</h2>
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {product.prices.map((price, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 p-4 rounded-lg flex flex-col justify-between"
-              >
-                <a
-                  href={price.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg text-blue-400 font-medium"
-                >
-                  {price.tienda}
-                </a>
-                <p className="text-white mt-2">${price.price}</p>
-                <p className="text-gray-400">Stock: {price.stock}</p>
-              </div>
-            ))}
+    <div id='maincontentsearch' className="container mx-auto  p-4 max-w-4xl bg-[#1a0140] text-gray-100">
+      <Button onClick={() => window.location.href = '/'} variant="ghost" className="mb-4 text-gray-300 hover:text-gray-100 hover:bg-[#2f026c]">
+        <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+      </Button>
+      <Card className="bg-[#2f026c] border-[#4a0ca4]">
+        <CardHeader>
+          <CardTitle className="text-2xl text-gray-100">{product.name}</CardTitle>
+          <div className="flex items-center space-x-2 text-sm text-gray-300">
+            <Badge variant="secondary" className="bg-[#4a0ca4] text-gray-200">{product.category}</Badge>
+            <Separator orientation="vertical" className="h-4 bg-[#6614df]" />
+            <Badge variant="outline" className="text-gray-200 border-[#6614df]">{product.marca}</Badge>
           </div>
-        </div>
-      </div>
+        </CardHeader>
+        <CardContent className="grid gap-6 md:grid-cols-2">
+          <div>
+            <Image
+              src={product.links || '/placeholder.svg'}
+              alt={product.name}
+              width={300}
+              height={300}
+              className="rounded-md object-cover"
+            />
+            <p className="mt-4 text-sm text-gray-300">{product.description}</p>
+          </div>
+          <div className="space-y-4">
+            <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-100">Available Stores</h3>
+                <CollapsibleTrigger asChild>
+                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-gray-100 hover:bg-[#4a0ca4]">
+                    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "transform rotate-180" : ""}`} />
+                    <span className="sr-only">Toggle stores list</span>
+                  </Button>
+                </CollapsibleTrigger>
+              </div>
+              <Separator className="my-4 bg-[#6614df]" />
+              <CollapsibleContent>
+                <div className="flex items-center space-x-2 mb-4">
+                  <Input
+                    type="text"
+                    placeholder="Search stores..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="flex-grow bg-[#4a0ca4] border-[#6614df] text-gray-100 placeholder-gray-400"
+                  />
+                  <Select value={sortOption} onValueChange={setSortOption}>
+                    <SelectTrigger className="w-[140px] bg-[#4a0ca4] border-[#6614df] text-gray-100">
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#2f026c] border-[#4a0ca4]">
+                      <SelectItem value="price-asc">Price: Low to High</SelectItem>
+                      <SelectItem value="price-desc">Price: High to Low</SelectItem>
+                      <SelectItem value="store-asc">Store: A to Z</SelectItem>
+                      <SelectItem value="store-desc">Store: Z to A</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  {filteredAndSortedPrices.map((price) => (
+                    <div
+                      key={price.tienda}
+                      className={`flex items-center justify-between p-2 rounded-md transition-colors ${
+                        selectedStore === price.tienda ? 'bg-[#4a0ca4]' : 'hover:bg-[#4a0ca4]'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="w-6 h-6 p-0 text-gray-300 hover:text-gray-100 hover:bg-[#6614df]"
+                          onClick={() => setSelectedStore(price.tienda)}
+                        >
+                          {selectedStore === price.tienda ? (
+                            <Check className="h-4 w-4 text-gray-100" />
+                          ) : (
+                            <div className="w-4 h-4 rounded-full border-2 border-[#6614df]" />
+                          )}
+                        </Button>
+                        <span className="font-medium text-gray-100">{price.tienda}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-bold text-gray-100">{formatPrice(price.price)}</span>
+                        {price === bestPrice && (
+                          <Badge variant="secondary" className="ml-2 bg-[#6614df] text-gray-200">
+                            Best Price
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+        </CardContent>
+        <CardFooter>
+          {bestPrice && (
+            <a
+              href={bestPrice.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 underline"
+            >
+              Buy at the best price!
+            </a>
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 };

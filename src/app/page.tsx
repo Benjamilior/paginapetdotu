@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 import ProductList from './components/primer';
-import Component from './components/vercel';
+
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -37,7 +37,7 @@ const Home = () => {
         {/* Mostrar el valor del SKU dentro del formulario */}
         <div className="mt-2" >
           <p>SKU ingresado: <strong>{sku}</strong></p>
-          <Component></Component>
+          
          
         </div>
       </form>
