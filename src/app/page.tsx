@@ -1,7 +1,8 @@
 // src/app/page.tsx
 "use client";
 import ProductList from './components/primer';
-
+import {WobbleCardDemo} from './components/newsforprincipal';
+import {AppleCardsCarouselDemo} from './components/newsforcell';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -37,10 +38,16 @@ const Home = () => {
         {/* Mostrar el valor del SKU dentro del formulario */}
         <div className="mt-2" >
           <p>SKU ingresado: <strong>{sku}</strong></p>
-          
-         
         </div>
       </form>
+      <div className="hidden xl:block 2xl:block">
+        <WobbleCardDemo />
+      </div>
+      <div className="block md:block lg:block xl:hidden 2xl:hidden">
+        <AppleCardsCarouselDemo />
+      </div>
+
+
     </div>
   );
 };
