@@ -3,6 +3,7 @@
 import ProductList from './components/primer';
 import {WobbleCardDemo} from './components/newsforprincipal';
 import {AppleCardsCarouselDemo} from './components/newsforcell';
+import HomePageHero from './components/searchinicio';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -40,6 +41,7 @@ const Home = () => {
           <p>SKU ingresado: <strong>{sku}</strong></p>
         </div>
       </form>
+      <HomePageHero></HomePageHero> 
       <div className="hidden xl:block 2xl:block">
         <WobbleCardDemo />
       </div>
