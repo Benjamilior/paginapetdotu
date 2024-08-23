@@ -88,17 +88,17 @@ export default function Component() {
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <Button variant="ghost" className="mb-4">
+    <div className="container mx-auto p-4 max-w-4xl bg-[#1a0140] text-gray-100">
+      <Button variant="ghost" className="mb-4 text-gray-300 hover:text-gray-100 hover:bg-[#2f026c]">
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
       </Button>
-      <Card>
+      <Card className="bg-[#2f026c] border-[#4a0ca4]">
         <CardHeader>
-          <CardTitle className="text-2xl">{product.name}</CardTitle>
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Badge variant="secondary">{product.category}</Badge>
-            <Separator orientation="vertical" className="h-4" />
-            <Badge variant="outline">{product.brand}</Badge>
+          <CardTitle className="text-2xl text-gray-100">{product.name}</CardTitle>
+          <div className="flex items-center space-x-2 text-sm text-gray-300">
+            <Badge variant="secondary" className="bg-[#4a0ca4] text-gray-200">{product.category}</Badge>
+            <Separator orientation="vertical" className="h-4 bg-[#6614df]" />
+            <Badge variant="outline" className="text-gray-200 border-[#6614df]">{product.brand}</Badge>
           </div>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
@@ -111,20 +111,20 @@ export default function Component() {
                 className="rounded-md object-cover"
               />
             </AspectRatio>
-            <p className="mt-4 text-sm text-muted-foreground">{product.description}</p>
+            <p className="mt-4 text-sm text-gray-300">{product.description}</p>
           </div>
           <div className="space-y-4">
             <Collapsible open={isOpen} onOpenChange={setIsOpen}>
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Available Stores</h3>
+                <h3 className="text-lg font-semibold text-gray-100">Available Stores</h3>
                 <CollapsibleTrigger asChild>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-gray-100 hover:bg-[#4a0ca4]">
                     <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "transform rotate-180" : ""}`} />
                     <span className="sr-only">Toggle stores list</span>
                   </Button>
                 </CollapsibleTrigger>
               </div>
-              <Separator className="my-4" />
+              <Separator className="my-4 bg-[#6614df]" />
               <CollapsibleContent>
                 <div className="flex items-center space-x-2 mb-4">
                   <Input
@@ -132,13 +132,13 @@ export default function Component() {
                     placeholder="Search stores..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-grow"
+                    className="flex-grow bg-[#4a0ca4] border-[#6614df] text-gray-100 placeholder-gray-400"
                   />
                   <Select value={sortOption} onValueChange={setSortOption}>
-                    <SelectTrigger className="w-[140px]">
+                    <SelectTrigger className="w-[140px] bg-[#4a0ca4] border-[#6614df] text-gray-100">
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-[#2f026c] border-[#4a0ca4]">
                       <SelectItem value="price-asc">Price: Low to High</SelectItem>
                       <SelectItem value="price-desc">Price: High to Low</SelectItem>
                       <SelectItem value="store-asc">Store: A to Z</SelectItem>
@@ -151,28 +151,28 @@ export default function Component() {
                     <div
                       key={price.store}
                       className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                        selectedStore === price.store ? 'bg-primary/10' : 'hover:bg-muted'
+                        selectedStore === price.store ? 'bg-[#4a0ca4]' : 'hover:bg-[#4a0ca4]'
                       }`}
                     >
                       <div className="flex items-center space-x-2">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-6 h-6 p-0"
+                          className="w-6 h-6 p-0 text-gray-300 hover:text-gray-100 hover:bg-[#6614df]"
                           onClick={() => setSelectedStore(price.store)}
                         >
                           {selectedStore === price.store ? (
-                            <Check className="h-4 w-4 text-primary" />
+                            <Check className="h-4 w-4 text-gray-100" />
                           ) : (
-                            <div className="w-4 h-4 rounded-full border-2 border-muted-foreground" />
+                            <div className="w-4 h-4 rounded-full border-2 border-[#6614df]" />
                           )}
                         </Button>
-                        <span className="font-medium">{price.store}</span>
+                        <span className="font-medium text-gray-100">{price.store}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="font-bold">{formatPrice(price.price)}</span>
+                        <span className="font-bold text-gray-100">{formatPrice(price.price)}</span>
                         {index === 0 && (
-                          <Badge variant="secondary" className="ml-2">
+                          <Badge variant="secondary" className="ml-2 bg-[#6614df] text-gray-200">
                             Best Price
                           </Badge>
                         )}
@@ -187,7 +187,7 @@ export default function Component() {
         <CardFooter>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button className="w-full" disabled={!selectedStore}>
+              <Button className="w-full bg-[#4a0ca4] text-gray-100 hover:bg-[#6614df]" disabled={!selectedStore}>
                 <ShoppingCart className="mr-2 h-4 w-4" /> 
                 {selectedStore 
                   ? `Add to Cart (${selectedStore}: ${formatPrice(filteredAndSortedPrices.find(p => p.store === selectedStore)?.price || 0)})`
@@ -195,12 +195,12 @@ export default function Component() {
                 }
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="bg-[#2f026c] border-[#4a0ca4]">
               <AlertDialogHeader>
-                <AlertDialogTitle>Confirm Purchase</AlertDialogTitle>
-                <AlertDialogDescription>
+                <AlertDialogTitle className="text-gray-100">Confirm Purchase</AlertDialogTitle>
+                <AlertDialogDescription className="text-gray-300">
                   Are you sure you want to add this item to your cart?
-                  <div className="mt-2 p-2 bg-muted rounded-md">
+                  <div className="mt-2 p-2 bg-[#4a0ca4] rounded-md text-gray-200">
                     <p><strong>Product:</strong> {product.name}</p>
                     <p><strong>Store:</strong> {selectedStore}</p>
                     <p><strong>Price:</strong> {formatPrice(filteredAndSortedPrices.find(p => p.store === selectedStore)?.price || 0)}</p>
@@ -208,8 +208,8 @@ export default function Component() {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Confirm Purchase</AlertDialogAction>
+                <AlertDialogCancel className="bg-[#4a0ca4] text-gray-100 hover:bg-[#6614df]">Cancel</AlertDialogCancel>
+                <AlertDialogAction className="bg-[#6614df] text-gray-100 hover:bg-[#7d2df9]">Confirm Purchase</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
