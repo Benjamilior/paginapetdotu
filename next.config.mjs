@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['drive.google.com'], // Agrega el dominio de las imágenes que vas a usar
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'cdn.shopify.com',
+          port: '',
+          pathname: '/s/files/**',
+        },
+      ], 
     },
   };
   

@@ -15,6 +15,7 @@ interface Product {
   description: string;
   category: string;
   marca: string;
+  links: string; // Asume que links es una URL de la imagen
   prices: Price[];
 }
 
@@ -61,15 +62,20 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-4 bg-gray-800 rounded-lg shadow-lg">
       <div className="flex flex-col lg:flex-row">
-        <div className="lg:w-1/3 flex justify-center">
-          <Image
-            src="https://drive.google.com/uc?export=view&id=1iE3-D2Z0Fpc99dQ3MXdLAEcvFs3604ZM" 
-            alt={product.name}
-            width={300}
-            height={300}
-            className="rounded-lg"
-          />
-        </div>
+      <div className="lg:w-1/3 flex justify-center">
+  {product.links && product.links.startsWith('http') ? (
+    <Image
+      src={product.links || 'https://cdn.shopify.com/s/files/1/0556/8898/6785/files/fit-formula-perro-senior-20-kg-220963.png?v=1714140584'}
+      alt={product.name}
+      width={300}
+      height={300}
+      className="rounded-lg"
+    />
+  ) : (
+    <div className="text-gray-500">No image available</div>
+  )}
+</div>
+
         <div className="lg:w-2/3 lg:pl-8 mt-6 lg:mt-0">
           <h1 className="text-2xl font-bold text-white">{product.name}</h1>
           <p className="text-gray-300">{product.description}</p>

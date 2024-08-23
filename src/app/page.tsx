@@ -36,6 +36,7 @@ const Home = () => {
         {/* Mostrar el valor del SKU dentro del formulario */}
         <div className="mt-2" >
           <p>SKU ingresado: <strong>{sku}</strong></p>
+          <img src="https://cdn.shopify.com/s/files/1/0556/8898/6785/files/acana-classic-wild-coast-perro-979245.png?v=1714140347" alt="Producto Acana Classic Wild Coast" />
         </div>
       </form>
     </div>
