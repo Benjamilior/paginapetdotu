@@ -9,7 +9,7 @@ const SearchPage: React.FC = () => {
   const sku = searchParams.get('sku') || ''; // Obtener el SKU de los parámetros de búsqueda
 
   return (
-    <div id='maincontentsearch' className='container mx-auto p-4'>
+    <div id='maincontentsearch' className='min-h-screen container mx-auto p-4'>
       {sku ? (
         <ProductList sku={sku} /> // Pasar el SKU al componente ProductList
       ) : (

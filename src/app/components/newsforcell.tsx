@@ -10,9 +10,9 @@ export function AppleCardsCarouselDemo() {
 
   return (
     <div className="w-full h-full py-20 min-w-[300px] min-h-[400px]">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-        Get to know your iSad.
-      </h2>
+      {/* <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-indigo-50 dark:text-neutral-200 font-sans">
+        Descubre las ultimas noticas relacionado a mascotas.
+      </h2> */}
       <Carousel items={cards} />
     </div>
   );
@@ -51,12 +51,7 @@ const DummyContent = () => {
 };
 
 const data = [
-  {
-    category: "Artificial Intelligence",
-    title: "You can do more with AI.",
-    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
+ 
   {
     category: "Productivity",
     title: "Enhance your productivity.",

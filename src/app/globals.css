@@ -2,14 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-#maincontent,
-#maincontentsearch{
-    
-        height: 90vh;
-        width: 100%;
-      
-}
 
+
+@media(max-width: 639px){
+     .maincontentsearch{
+        height: 100%;
+        width: 100%;
+     }
+}
+@media (max-width: 639px) {
+        .container {
+            /* Estilos que se aplican a pantallas más pequeñas */
+            /* Puedes sobrescribir o ajustar los estilos si es necesario */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a0140;
+            color: white;
+            padding: 1rem;
+            overflow: hidden;
+        }
+    }
 body{
         background-color: #1A0140;
 }

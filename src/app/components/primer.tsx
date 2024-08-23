@@ -61,7 +61,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   const filteredAndSortedPrices = useMemo(() => {
     if (!product?.prices) return []; // Retorna un array vacío si product.prices es undefined
     return product.prices
-      .filter((price) => price.stock > 0)
+      .filter((price) => price.price !== null)
       .filter((price) => price.tienda.toLowerCase().includes(searchTerm.toLowerCase()))
       .sort((a, b) => {
         if (sortOption === "price-asc") return a.price - b.price;
@@ -94,7 +94,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   }
 
   return (
-    <div id='maincontentsearch' className=" w-11/12 container mx-auto  p-4 max-w-4xl bg-[#1a0140] text-gray-100">
+    <div id='maincontentsearch' className="w-full container mx-auto  p-4 max-w-4xl bg-[#1a0140] text-gray-100">
       <Button onClick={() => window.location.href = '/'} variant="ghost" className="mb-4 text-gray-300 hover:text-gray-100 hover:bg-[#2f026c]">
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
       </Button>
@@ -144,10 +144,10 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#2f026c] border-[#4a0ca4]">
-                      <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                      <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                      <SelectItem value="store-asc">Store: A to Z</SelectItem>
-                      <SelectItem value="store-desc">Store: Z to A</SelectItem>
+                      <SelectItem value="price-asc">Precio: Low to High</SelectItem>
+                      <SelectItem value="price-desc">Precio: High to Low</SelectItem>
+                      <SelectItem value="store-asc">Tienda: A to Z</SelectItem>
+                      <SelectItem value="store-desc">Tienda: Z to A</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -183,7 +183,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
                         <span className="font-bold text-gray-100">{formatPrice(price.price)}</span>
                         {price === bestPrice && (
                           <Badge variant="secondary" className="ml-2 bg-[#6614df] text-gray-200">
-                            Best Price
+                            Mejor Precio
                           </Badge>
                         )}
                       </div>
@@ -202,7 +202,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
               rel="noopener noreferrer"
               className="text-blue-400 underline"
             >
-              Buy at the best price!
+              Compra al mejor precio!
             </a>
           )}
         </CardFooter>
