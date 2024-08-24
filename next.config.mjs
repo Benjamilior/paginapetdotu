@@ -1,21 +1,17 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.shopify.com',
-        port: '',
-        pathname: '/s/files/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**', // Permite cualquier hostname
         port: '',
         pathname: '/**',
       },
     ],
   },
 };
+
 
 export default nextConfig;

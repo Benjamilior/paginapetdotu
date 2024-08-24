@@ -4,6 +4,9 @@ import ProductList from './components/primer';
 import {WobbleCardDemo} from './components/newsforprincipal';
 import {AppleCardsCarouselDemo} from './components/newsforcell';
 import HomePageHero from './components/searchinicio';
+import { Search } from  "./components/Search"
+
+
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -22,6 +25,7 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       <HomePageHero></HomePageHero> 
+      <Search></Search>
       <div className="hidden xl:block 2xl:block">
         <WobbleCardDemo />
       </div>
