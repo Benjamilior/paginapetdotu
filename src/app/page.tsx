@@ -25,7 +25,8 @@ const Home = () => {
       <div className="hidden xl:block 2xl:block">
         <WobbleCardDemo />
       </div>
-      <h2 className='text-5xl font-bold text-indigo-50 dark:text-neutral-200 font-sans'>Noticias</h2>
+      <h2 className='block md:hidden text-2xl font-bold text-indigo-50 dark:text-neutral-200 font-sans'>
+        Noticias</h2>
       
       <div className=" md: lg:block xl:hidden 2xl:hidden">
         <AppleCardsCarouselDemo />

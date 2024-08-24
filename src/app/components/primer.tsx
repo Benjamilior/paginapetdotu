@@ -143,7 +143,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
                     <SelectTrigger className="w-[140px] bg-[#4a0ca4] border-[#6614df] text-gray-100">
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#2f026c] border-[#4a0ca4]">
+                    <SelectContent className="bg-indigo-50 border-[#4a0ca4]">
                       <SelectItem value="price-asc">Precio: Low to High</SelectItem>
                       <SelectItem value="price-desc">Precio: High to Low</SelectItem>
                       <SelectItem value="store-asc">Tienda: A to Z</SelectItem>
