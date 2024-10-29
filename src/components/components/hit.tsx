@@ -1,15 +1,28 @@
-// components/Hit.tsx
 import { Highlight } from "react-instantsearch";
-import { getPropertyByPath } from "instantsearch.js/es/lib/utils";
+import { Hit as AlgoliaHit } from "instantsearch.js/es/types";
 import { useSearch } from "../../../context/SearchContext";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-export const Hit = ({ hit }) => {
-  const { setSku } = useSearch(); // Usa el hook para acceder a setSku
+
+interface ProductHit extends AlgoliaHit {
+  link: string;
+  name: string;
+  category: string;
+  marca: string;
+  sku: string;
+}
+
+interface HitProps {
+  hit: ProductHit;
+}
+
+export const Hit: React.FC<HitProps> = ({ hit }) => {
+  const { setSku } = useSearch();
   const router = useRouter();
+
   const handleClick = () => {
     setSku(hit.sku);
-    router.push(`/search?sku=${hit.sku}`); // Actualiza el estado del SKU en el contexto
+    router.push(`/search?sku=${hit.sku}`);
   };
 
   return (
@@ -25,28 +38,16 @@ export const Hit = ({ hit }) => {
         className="w-full object-cover"
       />
       <div className="hit-name">
-        <Highlight
-          attribute="name"
-          hit={hit}
-        />
+        <Highlight attribute="name" hit={hit} />
       </div>
       <div className="hit-category">
-        <Highlight
-          attribute="category"
-          hit={hit}
-        />
+        <Highlight attribute="category" hit={hit} />
       </div>
       <div className="hit-marca">
-        <Highlight
-          attribute="marca"
-          hit={hit}
-        />
+        <Highlight attribute="marca" hit={hit} />
       </div>
       <div className="hit-sku">
-        <Highlight
-          attribute="sku"
-          hit={hit}
-        />
+        <Highlight attribute="sku" hit={hit} />
       </div>
     </article>
   );
