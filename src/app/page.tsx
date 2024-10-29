@@ -24,8 +24,11 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-4">
+      {/* Contiene el H1 de la pagina */}
       <HomePageHero></HomePageHero> 
+      {/* Busqueda por Algolia */}
       <Search></Search>
+      {/* Parte de bonito */}
       <div className="hidden xl:block 2xl:block">
         <WobbleCardDemo />
       </div>
