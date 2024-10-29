@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Nabla } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/footer";
-import Navbar from "./components/navbar";
+import Footer from "../components/components/footer";
+import Navbar from "../components/components/navbar";
 import { SearchProvider } from '../../context/SearchContext';
 
 

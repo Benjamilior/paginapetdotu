@@ -2,7 +2,7 @@
 // src/app/search/page.tsx
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
-import ProductList from '../components/primer';
+import ProductList from '../../components/components/primer';
 
 const SearchPage: React.FC = () => {
   const searchParams = useSearchParams();

@@ -1,10 +1,10 @@
 // src/app/page.tsx
 "use client";
-import ProductList from './components/primer';
-import {WobbleCardDemo} from './components/newsforprincipal';
-import {AppleCardsCarouselDemo} from './components/newsforcell';
-import HomePageHero from './components/searchinicio';
-import { Search } from  "./components/Search"
+import ProductList from '../components/components/primer';
+import {WobbleCardDemo} from '../components/components/newsforprincipal';
+import {AppleCardsCarouselDemo} from '../components/components/newsforcell';
+import HomePageHero from '../components/components/searchinicio';
+import { Search } from  "../components/components/Search"
 
 
 
