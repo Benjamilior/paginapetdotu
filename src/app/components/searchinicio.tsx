@@ -25,7 +25,7 @@ const HomePageHero: React.FC = () => {
           Encuentra rápidamente el producto para tu mascota al mejor precio 
         </p>
         
-        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 animate-fade-in animation-delay-1000">
+        {/* <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 animate-fade-in animation-delay-1000">
           <input
             type="text"
             placeholder="Ingrese SKU del Producto"
@@ -40,7 +40,7 @@ const HomePageHero: React.FC = () => {
             <Search className="w-6 h-6 mr-2" />
             Buscar
           </button>
-        </form>
+        </form> */}
       </div>
     </div>
   )

@@ -22,6 +22,7 @@ export const Hit = ({ hit }) => {
         alt={hit.name}
         width={300}
         height={200}
+        className="w-full object-cover"
       />
       <div className="hit-name">
         <Highlight

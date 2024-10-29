@@ -61,7 +61,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   const filteredAndSortedPrices = useMemo(() => {
     if (!product?.prices) return []; // Retorna un array vacío si product.prices es undefined
     return product.prices
-      .filter((price) => price.price !== null)
+      .filter((price) => price.price !== null && price.price > 0) // Filtra precios no nulos y mayores a 0
       .filter((price) => price.tienda.toLowerCase().includes(searchTerm.toLowerCase()))
       .sort((a, b) => {
         if (sortOption === "price-asc") return a.price - b.price;
@@ -71,12 +71,13 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
         return 0;
       });
   }, [product?.prices, searchTerm, sortOption]);
+  
 
   const bestPrice = filteredAndSortedPrices[0] || {}; // Asegúrate de manejar el caso en que filteredAndSortedPrices sea un array vacío
 
   const formatPrice = (price: number | null | undefined): string => {
     if (price === null || price === undefined) {
-      return "$0"; // O cualquier valor predeterminado que prefieras
+      return "no disponible"; // O cualquier valor predeterminado que prefieras
     }
     return `$${price.toLocaleString()}`;
   };
@@ -108,6 +109,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
           </div>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
+          {/* // Aquí va la imagen */}
           <div>
             <Image
               src={product.links || '/placeholder.svg'}

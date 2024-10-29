@@ -12,8 +12,8 @@ export const Search = () => {
       searchClient={searchClient}
       indexName="pets_index"
     >
-      <Configure hitsPerPage={5} />
-      <div className="ais-InstantSearch">
+      <Configure hitsPerPage={3} />
+      <div className="w-full max-w-screen-lg mx-auto overflow-hidden">
         <SearchBox />
         <Hits hitComponent={Hit} />
       </div>
