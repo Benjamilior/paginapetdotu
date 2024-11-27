@@ -1,6 +1,7 @@
 "use client";
 // components/Navbar.tsx
 import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '../../../context/SearchContext'; // Importa el hook useSearch
 
@@ -18,9 +19,10 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-md">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://www.dotu.io/" className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
+      <Link href="/" className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
+          
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dotu Pets</span>
-        </a>
+        </Link>
 
         <div className="flex flex-1 justify-center items-center">
           <div className="relative w-full max-w-md">

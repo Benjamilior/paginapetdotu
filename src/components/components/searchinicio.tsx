@@ -24,6 +24,8 @@ const HomePageHero: React.FC = () => {
         <p className="text-xl sm:text-2xl mb-8 animate-fade-in-up animation-delay-500">
           Encuentra rápidamente el producto para tu mascota al mejor precio 
         </p>
+        <p className="text-xl sm:text-2xl mb-8 animate-fade-in-up animation-delay-500">
+          Prueba por ejemplo: Acana Wild Atlantic        </p>
         
         {/* <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 animate-fade-in animation-delay-1000">
           <input

@@ -42,7 +42,7 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://dotupetpublic-production.up.railway.app/product/${sku}`);
+        const response = await fetch(`https://dotupetpublic-production-1710.up.railway.app/product/${sku}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product');
         }
