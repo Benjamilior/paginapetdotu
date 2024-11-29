@@ -61,7 +61,8 @@ const ProductList: React.FC<ProductListProps> = ({ sku }) => {
   const filteredAndSortedPrices = useMemo(() => {
     if (!product?.prices) return []; // Retorna un array vacío si product.prices es undefined
     return product.prices
-      .filter((price) => price.price !== null && price.price > 0) // Filtra precios no nulos y mayores a 0
+      .filter((price) => price.price !== null && price.price > 1)
+       // Filtra precios no nulos y mayores a 0
       .filter((price) => price.tienda.toLowerCase().includes(searchTerm.toLowerCase()))
       .sort((a, b) => {
         if (sortOption === "price-asc") return a.price - b.price;
